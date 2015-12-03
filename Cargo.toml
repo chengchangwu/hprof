@@ -9,7 +9,7 @@ readme = "README.md"
 license = "BSL-1.0"
 
 [dependencies]
-clock_ticks = "*"
+time = "*"
 log = "*"
 
 [features]

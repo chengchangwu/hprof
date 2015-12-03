@@ -56,7 +56,7 @@
 
 #[macro_use]
 extern crate log;
-extern crate clock_ticks;
+extern crate time;
 
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;
@@ -247,7 +247,7 @@ impl ProfileNode {
         self.calls.set(self.calls.get() + 1);
         let rec = self.recursion.get();
         if rec == 0 {
-            self.start_time.set(clock_ticks::precise_time_ns());
+            self.start_time.set(time::precise_time_ns());
         }
         self.recursion.set(rec + 1);
     }
@@ -256,7 +256,7 @@ impl ProfileNode {
     pub fn ret(&self) -> bool {
         let rec = self.recursion.get();
         if rec == 1 {
-            let time = clock_ticks::precise_time_ns();
+            let time = time::precise_time_ns();
             let durr = time - self.start_time.get();
             self.total_time.set(self.total_time.get() + durr);
         }
